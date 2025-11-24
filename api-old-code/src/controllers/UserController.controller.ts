@@ -27,9 +27,9 @@ export class UsersController extends Controller implements IUserController {
 */
 
 import { Controller as BaseController, Delete, Get, Post, Put, Route, Tags} from "tsoa";
-import { IUserController } from "../interfaces/IUserController.interface";
+import { IUserController } from "src/interfaces/IUserController.interface";
 import { inject, injectable } from "inversify";
-import { IUserService } from "../interfaces/IUserService.interface";
+import { IUserService } from "src/interfaces/IUserService.interface";
 import { TYPES } from "../types/binding.types";
 import { Controller } from "../decorators";
 

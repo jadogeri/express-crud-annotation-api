@@ -1,31 +1,30 @@
-import { DataSource, MongoRepository } from "typeorm";
+import { DataSource, MongoRepository, Repository as BaseRepository } from "typeorm";
 import { Repository } from "../decorators";
 import { IUserRepository } from "../interfaces/IUserRepository.interface";
 import { User } from "../entities/User.entity";
 import { inject } from "inversify";
 import { TYPES } from "../types/binding.types";
 
-let count = 0;
 @Repository()
 
-export class UserRepository extends MongoRepository<User> implements IUserRepository{
+export class UserRepository extends BaseRepository<User> implements IUserRepository{
 
     // constructor(@inject(TYPES.DataSource) private dataSource: DataSource) {
     //     super(User, dataSource.createEntityManager());
     // }
 
-    
-    private readonly repository: MongoRepository<User>;
+    //@inject(TYPES.MongoRepositoryUser)
+    // private readonly repository: MongoRepository<User>;
 
-      constructor(@inject(TYPES.MongoRepositoryUser) repository: MongoRepository<User>, @inject(TYPES.DataSource) private dataSource: DataSource) {
+      constructor( @inject(TYPES.DataSource) private dataSource: DataSource) {
         super(User, dataSource.createEntityManager())
-        this.repository = repository;
+        // this.repository = repository;
         
   }
 
     findAll(): Promise<any> {
 
-        return this.findAll();
+        return this.find();
     }
     async findById(): Promise<any> {
         return { name: "john doe"};
@@ -41,7 +40,7 @@ export class UserRepository extends MongoRepository<User> implements IUserReposi
     }
 
     async deleteAllRows(): Promise<any> {
-        return { name: "john doe"};
+        return { message: "deleted user successful"};
     }
 
 
