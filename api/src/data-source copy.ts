@@ -1,7 +1,3 @@
-
-
-
-
 import "reflect-metadata"; // Required for inversify and typeorm decorators
 import { iocContainer} from "./configs/ioc.config";
 import { DataSource } from "typeorm";
@@ -24,5 +20,7 @@ export const initializeDatabase = async () => {
 
     // Bind the DataSource as a singleton
     iocContainer.bind<DataSource>(TYPES.DataSource).toConstantValue(dataSource);
+
+    console.log("🛢️  Database connected and DataSource bound.");
 
 }

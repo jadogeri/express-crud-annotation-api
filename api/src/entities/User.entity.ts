@@ -1,12 +1,9 @@
 // src/entities/User.ts
-import 'reflect-metadata'; 
-import { IUser } from 'src/interfaces/IUser.interface';
-
-import { Entity, PrimaryGeneratedColumn, Column, ObjectIdColumn, ObjectId } from "typeorm";
+import { Entity,  Column, ObjectIdColumn, ObjectId } from "typeorm";
 
 // Assuming a MongoDB setup from earlier context
 @Entity()
-export class User implements IUser{
+export class User{
   @ObjectIdColumn()
   _id: ObjectId;
 

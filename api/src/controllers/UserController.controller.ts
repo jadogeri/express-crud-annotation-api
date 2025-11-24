@@ -56,7 +56,9 @@ export class UserController extends BaseController {
   }
   @Get("")
   async getUsers(): Promise<any> {
-    return await this.userService.getAll();
+    const users = await this.userService.getAll()
+    console.log("list of users: ", users)
+    return users;
   }
   @Put("{userId}")
   async updateUser(): Promise<any> {
