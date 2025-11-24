@@ -32,7 +32,6 @@
     "body-parser": "^2.2.0",
     "express": "^5.1.0",
     "inversify": "^7.10.4",
-    "inversify-binding-decorators": "^4.0.0",
     "inversify-express-utils": "^6.5.0",
     "mongodb": "^7.0.0",
     "reflect-metadata": "^0.2.2",

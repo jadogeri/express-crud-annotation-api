@@ -1,0 +1,35 @@
+{
+  "entryFile": "src/server.ts",
+  "noImplicitAdditionalProperties": "throw-on-extras",
+  "controllerPathGlobs": ["src/**/*controller.ts"],
+  "spec": {
+    "outputDirectory": "src",
+    "specVersion": 3,
+    "name": "Custom API Name",
+    "description": "Custom API Description",
+    "version": "1.0.0",
+    "license": "MIT",
+    "contact": {
+      "name": "API Contact",
+      "email": "help@example.com",
+      "url": "http://example.com"
+    },
+    "spec": { 
+      "servers": [
+        {
+          "url": "http://localhost:3000/api/v1",
+          "description": "Local development"
+        },
+        {
+          "url": "http://prod:8080/api/v1",
+          "description": "Production server"
+        }
+      ]
+    }
+  },
+  "routes": {
+    "routesDir": "src"
+  }
+}
+
+
