@@ -31,6 +31,7 @@ export const configureIOC = () => {
     iocContainer.bind<IUserService>(TYPES.IUserService).to(UserService).inSingletonScope();
 // Bind the interface to the concrete implementation
     iocContainer.bind<UserController>(UserController).toSelf();
+    
 
 }
 
