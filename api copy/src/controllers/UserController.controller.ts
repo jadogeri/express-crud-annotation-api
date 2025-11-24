@@ -1,43 +1,4 @@
-// src/users/usersController.ts
-
-interface IUserService{
-  create(userCreationParams: UserCreationParams): User;
-  get(id: number, name?: string): User ;
-}
-
-interface IUserController{
-  
-  getUser( userId: number, name?: string  ): Promise<User>;
-  createUser( requestBody: UserCreationParams ): Promise<void>;
-}
-export interface User {
-  id: number;
-  email: string;
-  name: string;
-  status?: "Happy" | "Sad";
-  phoneNumbers: string[];
-}
-export type UserCreationParams = Pick<User, "email" | "name" | "phoneNumbers">;
-export class UsersService implements IUserService{
-  public get(id: number, name?: string): User {
-    return {
-      id,
-      email: "jane@doe.com",
-      name: name ?? "Jane Doe",
-      status: "Happy",
-      phoneNumbers: [],
-    };
-  }
-  
-  public create(userCreationParams: UserCreationParams): User {
-    return {
-      id: Math.floor(Math.random() * 10000), 
-      status: "Happy",
-      ...userCreationParams,
-    }; 
-  }
-}
-import {
+/*import {
   Body, Controller, Get, Path, Post, Query, Route, SuccessResponse,
   Tags
 } from "tsoa";
@@ -48,7 +9,7 @@ export class UsersController extends Controller implements IUserController {
   public async getUser(
     @Path() userId: number,
     @Query() name?: string
-  ): Promise<User> {
+  ): Promise<any> {
     return new UsersService().get(userId, name);
   } 
   
@@ -61,4 +22,51 @@ export class UsersController extends Controller implements IUserController {
     new UsersService().create(requestBody);
     return;
   }
+}
+
+*/
+
+import { Controller as BaseController, Delete, Get, Post, Put, Route, Tags} from "tsoa";
+import { IUserController } from "src/interfaces/IUserController.interface";
+import { inject, injectable } from "inversify";
+import { IUserService } from "src/interfaces/IUserService.interface";
+import { TYPES } from "../types/binding.types";
+import { Controller } from "../decorators";
+
+
+@Route("users")
+@Tags("User")
+@Controller()
+export class UserController extends BaseController {
+
+    private readonly userService: IUserService;
+
+  constructor(@inject(TYPES.IUserService) userService: IUserService) {
+    super();
+    this.userService = userService;
+  }
+
+  @Post()
+  async createUser(): Promise<any> {
+    return await this.userService.create();
+  }
+  @Get("{userId}")
+  async getUser(): Promise<any> {
+    return await this.userService.getOne();
+  }
+  @Get("")
+  async getUsers(): Promise<any> {
+    const users = await this.userService.getAll()
+    console.log("list of users: ", users)
+    return users;
+  }
+  @Put("{userId}")
+  async updateUser(): Promise<any> {
+    return await this.userService.update();
+  }
+  @Delete("{userId}")
+  async deleteUser(): Promise<any> {
+    return await this.userService.delete();
+  }
+  
 }

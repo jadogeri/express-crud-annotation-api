@@ -1,10 +1,5 @@
 // src/users/usersController.ts
 
-interface IUserService{
-  create(userCreationParams: UserCreationParams): User;
-  get(id: number, name?: string): User ;
-}
-
 interface IUserController{
   
   getUser( userId: number, name?: string  ): Promise<User>;

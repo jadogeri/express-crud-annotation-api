@@ -1,5 +1,5 @@
 {
-  "entryFile": "src/server.ts",
+  "entryFile": "src/app.ts",
   "noImplicitAdditionalProperties": "throw-on-extras",
   "controllerPathGlobs": ["src/**/*controller.ts"],
   "spec": {
@@ -16,9 +16,14 @@
     },
     "spec": { 
       "servers": [
+
+        {
+          "url": "http://localhost:3000",
+          "description": "Development server"
+        },
         {
           "url": "http://localhost:3000/api/v1",
-          "description": "Local development"
+          "description": "Test Server"
         },
         {
           "url": "http://prod:8080/api/v1",
@@ -28,7 +33,9 @@
     }
   },
   "routes": {
-    "routesDir": "src"
+    "routesDir": "src",
+    "iocModule": "./src/configs/ioc.config.ts" 
+
   }
 }
 
