@@ -1,41 +1,42 @@
 import { inject, injectable } from "inversify";
 import { Service } from "../decorators";
-import { IUserService } from "src/interfaces/IUserService.interface";
+import { IUserService } from "../interfaces/IUserService.interface";
 import { DataSource, MongoRepository } from "typeorm";
 import { User } from "../entities/User.entity";
-import { UserRepository } from "src/repositories/UserRepository.repository";
+import { UserRepository } from "../repositories/UserRepository.repository";
+import { IUserRepository } from "../interfaces/IUserRepository.interface";
+import { TYPES } from "../types/binding.types";
 
-@Service()
+// @Service()
+@injectable()
 export class UserService implements IUserService{
 
-
-    private userRepository: MongoRepository<User>;
-
-    constructor(@inject(DataSource) private dataSource: DataSource) {
-        this.userRepository = dataSource.getMongoRepository(User);
-    }
+  constructor(@inject(TYPES.IUserRepository) private userRepository: UserRepository) {}
 
   
+    
     async create(): Promise<any> {
 
-        return await this.userRepository.save(
-            {
-                email: "one@one",name : "john snow"
-            }
-        );
+
+        const savedUser =  this.userRepository.save({name:"joseph", email: "email"  })
+
+        
+
+        return savedUser;
+        
     }
     async getOne(): Promise<any> {
         return await this.userRepository.find();
     }
     async getAll(): Promise<any> {
 
-        return await this.userRepository.find();
+        return await this.userRepository.findByName("joseph");
     }
     async update(): Promise<any> {
         return await this.userRepository.find();
     }
     async delete(): Promise<any> {
-        return await this.userRepository.deleteAll()
+        return  this.userRepository.clear();
     }
 
 }

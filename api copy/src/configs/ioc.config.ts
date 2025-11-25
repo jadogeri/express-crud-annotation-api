@@ -11,7 +11,6 @@ import { buildProviderModule } from "inversify-binding-decorators";
 import { DataSource } from 'typeorm';
 import  { TYPES } from "../types/binding.types"
 import { DatabaseProvider } from "../services/database.service";
-import { interfaces } from 'inversify-express-utils';
 
 
 
@@ -22,22 +21,17 @@ iocContainer.load(buildProviderModule());
 
 
 export const configureIOC = () => {
-
-    iocContainer.bind<UserController>(UserController).toSelf();
-
+    // Bind Interfaces to Implementations:
+    iocContainer.bind<IUserRepository>(TYPES.IUserRepository).to(UserRepository).inSingletonScope();
     iocContainer.bind<IUserService>(TYPES.IUserService).to(UserService).inSingletonScope();
-   // Bind the interface to the concrete implementation
+// Bind the interface to the concrete implementation
+    iocContainer.bind<UserController>(UserController).toSelf();
     iocContainer.bind<DatabaseProvider>(DatabaseProvider).to(DatabaseProvider).inSingletonScope();
     iocContainer.bind<DataSource>(DataSource).toConstantValue(iocContainer.get(DatabaseProvider).getDataSource()); // Bind DataSource instance
-
-iocContainer.bind<IUserRepository>(TYPES.IUserRepository).toDynamicValue(
-    () => {
-        const dataSource = iocContainer.get(DatabaseProvider).getDataSource()
-        return new UserRepository(dataSource);
-    }
-).inSingletonScope();
-
-
+    // iocContainer.bind<MongoRepository<User>>(TYPES.MongoRepositoryUser).toDynamicValue((context) => {
+    //     return context.get<DataSource>(TYPES.DataSource).getMongoRepository(User);
+    // }).inRequestScope(); // Adjust scope as necessary
+        
 
 }
 

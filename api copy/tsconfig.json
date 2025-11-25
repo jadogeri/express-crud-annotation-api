@@ -7,13 +7,13 @@
     "esModuleInterop": true,
     "noEmit": false,
     "sourceMap": true,                  /* Create source map files for emitted JavaScript files. */
-    "outDir": "../api/build",
+    "outDir": "./build",
     "forceConsistentCasingInFileNames": true,            /* Ensure that casing is correct in imports. */
     "strict": true,    
         /* Completeness */
      "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true   ,  
-    "baseUrl": "../api",
+    "baseUrl": ".",
         // "types": ["reflect-metadata"],
 
 
@@ -26,12 +26,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
-    "rootDir": "../api",
-    "typeRoots": ["../api/node_modules/@types"]
+    "rootDir": ".",
+    "typeRoots": ["./node_modules/@types"]
 
   },
     "include": [
-    "../api/src/**/*.ts", "../api/server.d.ts" ],
-  "exclude": ["../api/node_modules/*","../api/node_modules"],
+    "./src/**/*.ts", "server.d.ts" ],
+  "exclude": ["./node_modules/*","node_modules"],
 }
 

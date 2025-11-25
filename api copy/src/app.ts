@@ -1,15 +1,13 @@
 
 // app.ts
 import 'reflect-metadata'; 
-import express,{Request, Response, NextFunction} from 'express';
+import express from 'express';
 import * as bodyParser from "body-parser";
 import * as dotenv from "dotenv";
 import { RegisterRoutes } from "./routes";
 import * as swaggerJson from "./swagger.json";
 import * as swaggerUI from "swagger-ui-express";
 import { configureIOC } from './configs/ioc.config';
-import { ValidateError } from 'tsoa';
-import { errorHandler } from './middleware/errorHandler.middleware';
 
 dotenv.config();
 
@@ -28,7 +26,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 RegisterRoutes(app);
 app.use(["/openapi", "/docs", "/swagger"], swaggerUI.serve, swaggerUI.setup(swaggerJson));
 
-app.use(errorHandler);
+
+
+
+// src/app.ts (server setup)
 
 
 

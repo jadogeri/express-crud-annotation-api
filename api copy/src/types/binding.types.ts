@@ -5,7 +5,5 @@ export const TYPES = {
     IUserController: Symbol.for("IUserController"),
     MongoRepositoryUser: Symbol.for('MongoRepositoryUser'), // Symbol for the base repository
     DataSource: Symbol.for("DataSource"),
-    UserService: Symbol.for('UserService'),
-
 
 };
