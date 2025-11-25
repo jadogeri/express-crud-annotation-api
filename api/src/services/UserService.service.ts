@@ -5,7 +5,6 @@ import { DataSource, MongoRepository } from "typeorm";
 import { User } from "../entities/User.entity";
 import { UserRepository } from "src/repositories/UserRepository.repository";
 
-let count = 0
 @Service()
 export class UserService implements IUserService{
 

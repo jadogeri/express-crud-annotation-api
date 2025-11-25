@@ -37,7 +37,7 @@ import { Controller } from "../decorators";
 @Route("users")
 @Tags("User")
 @Controller()
-export class UserController extends BaseController {
+export class UserController extends BaseController implements IUserController {
 
     private readonly userService: IUserService;
 

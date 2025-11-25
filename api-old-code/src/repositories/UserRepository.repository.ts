@@ -1,30 +1,29 @@
-import { DataSource, MongoRepository, Repository as BaseRepository } from "typeorm";
+import { DataSource, getMongoRepository, MongoRepository } from "typeorm";
 import { Repository } from "../decorators";
 import { IUserRepository } from "../interfaces/IUserRepository.interface";
 import { User } from "../entities/User.entity";
 import { inject } from "inversify";
 import { TYPES } from "../types/binding.types";
 
+let count = 0;
 @Repository()
 
-export class UserRepository extends BaseRepository<User> implements IUserRepository{
+export class UserRepository extends MongoRepository<User> implements IUserRepository {
 
     // constructor(@inject(TYPES.DataSource) private dataSource: DataSource) {
     //     super(User, dataSource.createEntityManager());
     // }
 
-    //@inject(TYPES.MongoRepositoryUser)
-    // private readonly repository: MongoRepository<User>;
+    
 
       constructor( @inject(TYPES.DataSource) private dataSource: DataSource) {
         super(User, dataSource.createEntityManager())
-        // this.repository = repository;
         
   }
 
     findAll(): Promise<any> {
 
-        return this.find();
+        return this.findAll();
     }
     async findById(): Promise<any> {
         return { name: "john doe"};
@@ -40,8 +39,23 @@ export class UserRepository extends BaseRepository<User> implements IUserReposit
     }
 
     async deleteAllRows(): Promise<any> {
-        return { message: "deleted user successful"};
+        return await this.delete();
     }
 
+      // Add custom methods here
+  async findByEmail(email: string): Promise<User | null> {
+    // findOneBy is a standard TypeORM method for simple conditions
+    return await this.findOneBy({ email: email });
+  }
+
+  // You can add other custom methods as needed
+  async findByName(name: string): Promise<User[]> {
+    return this.find({
+      where: { name },
+    });
+  }
+
+  
 
 }
+
