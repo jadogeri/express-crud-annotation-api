@@ -161,11 +161,22 @@
 						}
 					}
 				},
+				"description": "Retrieves the details of an existing user.\r\nSupply the unique user ID from either and receive corresponding user details.",
 				"tags": [
 					"User"
 				],
 				"security": [],
-				"parameters": []
+				"parameters": [
+					{
+						"description": "The user's identifier",
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
 			},
 			"put": {
 				"operationId": "UpdateUser",

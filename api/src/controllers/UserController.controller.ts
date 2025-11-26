@@ -26,13 +26,15 @@ export class UsersController extends Controller implements IUserController {
 
 */
 
-import { Controller as BaseController, Body, Delete, Get, Post, Put, Route, Tags, Response} from "tsoa";
+import { Controller as BaseController, Body, Delete, Get, Post, Put, Route, Tags, Response, Path} from "tsoa";
 import { IUserController } from "src/interfaces/IUserController.interface";
 import { inject, injectable } from "inversify";
 import { IUserService } from "src/interfaces/IUserService.interface";
 import { TYPES } from "../types/binding.types";
 import { Controller } from "../decorators";
 import { UserCreationBody } from "../types/UserType.type";
+import mongoose from "mongoose"
+import { ObjectId } from "mongodb";
 
 interface ValidateErrorJSON {
   message: "Validation failed";
@@ -43,7 +45,6 @@ details: string[];}
 @Tags("User")
 @Controller() 
 @Response<ValidateErrorJSON>(422, "Validation Failed")
-
 export class UserController extends BaseController implements IUserController {
 
     private readonly userService: IUserService;
@@ -59,9 +60,22 @@ export class UserController extends BaseController implements IUserController {
 
     return await this.userService.create(requestBody);
   }
+    /**
+   * Retrieves the details of an existing user.
+   * Supply the unique user ID from either and receive corresponding user details.
+   * @param userId The user's identifier
+   */
   @Get("{userId}")
-  async getUser(): Promise<any> {
-    return await this.userService.getOne();
+  async getUser(@Path() userId: string): Promise<any> {
+
+    if(!mongoose.isObjectIdOrHexString(userId)){
+      this.setStatus(400);
+      
+      return {message: `id '${userId}' is not valid`}
+    }
+
+    const mongoId = new mongoose.Types.ObjectId(userId)
+    return await this.userService.getOne(mongoId);
   }
   @Get("")
   async getUsers(): Promise<any> {
