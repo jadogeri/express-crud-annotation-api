@@ -36,14 +36,13 @@ import { UserCreationBody } from "../types/UserType.type";
 
 interface ValidateErrorJSON {
   message: "Validation failed";
-  details: { [name: string]: unknown };
-}
+details: string[];}
 
 
 @Route("users")
 @Tags("User")
-@Controller()
- @Response<ValidateErrorJSON>(422, "Validation Failed")
+@Controller() 
+@Response<ValidateErrorJSON>(422, "Validation Failed")
 
 export class UserController extends BaseController implements IUserController {
 

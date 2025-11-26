@@ -17,9 +17,10 @@
 						"nullable": false
 					},
 					"details": {
-						"properties": {},
-						"additionalProperties": {},
-						"type": "object"
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
 					}
 				},
 				"required": [
