@@ -6,6 +6,7 @@ import { User } from "../entities/User.entity";
 import { UserRepository } from "../repositories/UserRepository.repository";
 import { IUserRepository } from "../interfaces/IUserRepository.interface";
 import { TYPES } from "../types/binding.types";
+import { UserCreationBody } from "../types/UserType.type";
 
 // @Service()
 @injectable()
@@ -15,12 +16,10 @@ export class UserService implements IUserService{
 
   
     
-    async create(): Promise<any> {
+    async create(requestBody: UserCreationBody): Promise<any> {
 
 
-        const savedUser =  this.userRepository.save({name:"joseph", email: "email"  })
-
-        
+        const savedUser =  this.userRepository.save(requestBody);        
 
         return savedUser;
         

@@ -1,9 +1,10 @@
 // src/entities/User.ts
-import { Entity,  Column, ObjectIdColumn, ObjectId } from "typeorm";
+import { IUser } from "../types/UserType.type";
+import { Entity,  Column, ObjectIdColumn, ObjectId, CreateDateColumn, UpdateDateColumn } from "typeorm";
 
 // Assuming a MongoDB setup from earlier context
 @Entity()
-export class User{
+export class User implements IUser{
   @ObjectIdColumn()
   _id: ObjectId;
 
@@ -12,4 +13,10 @@ export class User{
 
   @Column()
   email: string;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date
 }

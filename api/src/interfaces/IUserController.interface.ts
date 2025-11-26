@@ -1,5 +1,7 @@
+import { UserCreationBody } from "src/types/UserType.type";
+
 export interface IUserController{
-  createUser(): Promise<any>;
+  createUser(requestBody: UserCreationBody): Promise<any>;
   getUser(): Promise<any>;
   getUsers(): Promise<any>;
   updateUser(): Promise<any>;

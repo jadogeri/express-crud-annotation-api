@@ -21,6 +21,7 @@
   "type": "commonjs",
   "main": "./src/server.ts",
   "scripts": {
+    "prod": "concurrently \"npm run build -- --watch\" \"ts-node-dev --respawn --watch src,swagger.json src/server.ts\"",
     "clean": "rm -rf build/",
     "build": "tsoa spec-and-routes && tsc",
     "start": "node ./build/src/server.js",

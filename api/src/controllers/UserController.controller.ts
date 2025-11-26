@@ -26,17 +26,25 @@ export class UsersController extends Controller implements IUserController {
 
 */
 
-import { Controller as BaseController, Delete, Get, Post, Put, Route, Tags} from "tsoa";
+import { Controller as BaseController, Body, Delete, Get, Post, Put, Route, Tags, Response} from "tsoa";
 import { IUserController } from "src/interfaces/IUserController.interface";
 import { inject, injectable } from "inversify";
 import { IUserService } from "src/interfaces/IUserService.interface";
 import { TYPES } from "../types/binding.types";
 import { Controller } from "../decorators";
+import { UserCreationBody } from "../types/UserType.type";
+
+interface ValidateErrorJSON {
+  message: "Validation failed";
+  details: { [name: string]: unknown };
+}
 
 
 @Route("users")
 @Tags("User")
 @Controller()
+ @Response<ValidateErrorJSON>(422, "Validation Failed")
+
 export class UserController extends BaseController implements IUserController {
 
     private readonly userService: IUserService;
@@ -45,10 +53,12 @@ export class UserController extends BaseController implements IUserController {
     super();
     this.userService = userService;
   }
-
+  
   @Post()
-  async createUser(): Promise<any> {
-    return await this.userService.create();
+  async createUser( @Body() requestBody: UserCreationBody
+): Promise<any> {
+
+    return await this.userService.create(requestBody);
   }
   @Get("{userId}")
   async getUser(): Promise<any> {
