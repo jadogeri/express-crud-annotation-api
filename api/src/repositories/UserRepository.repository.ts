@@ -1,9 +1,10 @@
-import { DataSource, Repository as BaseRepository } from "typeorm";
+import { DataSource, Repository as BaseRepository, ObjectId } from "typeorm";
 import { Repository } from "../decorators";
 import { IUserRepository } from "../interfaces/IUserRepository.interface";
 import { User } from "../entities/User.entity";
-import { inject, injectable } from "inversify";
+import { inject } from "inversify";
 import { TYPES } from "../types/binding.types";
+import mongoose from "mongoose";
 
 
 @Repository()
@@ -13,12 +14,15 @@ export class UserRepository extends BaseRepository<User> implements IUserReposit
         super(User, dataSource.createEntityManager());
     }
 
-    async findByEmail(email: string): Promise<User[] | null> {
-        return await this.find({ where: { email } });
+    async findByEmail(email: string): Promise<User | null> {
+        return await this.findOne({ where: { email } });
     }
 
-    async findByName(name: string): Promise<User[] | null> {
-        return await this.find({ where: { name } });
+    async findByName(name: string): Promise<User | null> {
+        return await this.findOne({ where: { name } });
     }
 
+    async findById(id: mongoose.Types.ObjectId) {
+        return await this.findOne({ where: { _id: id } });
+    }
 }

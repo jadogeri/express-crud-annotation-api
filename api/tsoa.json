@@ -5,20 +5,26 @@
   "spec": {
     "outputDirectory": "src",
     "specVersion": 3,
-    "name": "Custom API Name",
-    "description": "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
+    "name": "User API",
+    "description": "This is a sample server User server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).",
     "version": "1.0.7",
     "termsOfService": "http://swagger.io/terms/",
     "license": {
-      "name": "Apache 2.0",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+      "name": "MIT License",
+      "url": "opensource.org"
     },
     "contact": {
-      "name": "API Contact",
-      "email": "www.google.com",
+      "name": "Joseph Adogeri",
+      "email": "johndoe@gmail.com",
       "url": "http://example.com"
     },
     "spec": { 
+    "tags": [
+      {
+        "name": "User",
+        "description": "Operations related to user management, including creation, retrieval, and updates."
+      }
+    ],
       "servers": [
 
         {

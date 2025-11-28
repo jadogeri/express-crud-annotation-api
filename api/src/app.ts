@@ -1,17 +1,18 @@
 
 // app.ts
 import 'reflect-metadata'; 
-import express,{ Application, NextFunction, Response, Request, json, urlencoded} from 'express';
+import express,{ Application, json, urlencoded} from 'express';
 import * as bodyParser from "body-parser";
 import * as dotenv from "dotenv";
 import { RegisterRoutes } from "./routes";
 import * as swaggerJson from "./swagger.json";
 import * as swaggerUI from "swagger-ui-express";
 import { configureIOC } from './configs/ioc.config';
-import { errorHandler } from './middleware/errorHandler.middleware';
 import { corsOptions } from './configs/cors.config';
 import cors from 'cors';
-import { notFoundHandler } from './middleware/noRouteHandler.middleware';
+import { notFoundHandler } from './middlewares/noRouteHandler.middleware';
+import { globalErrorHandler } from './middlewares/globalErrorHandler.middleware';
+
 dotenv.config();
 
 configureIOC();
@@ -40,8 +41,7 @@ app.use(json());
 RegisterRoutes(app);
 app.use(["/openapi", "/docs", "/swagger"], swaggerUI.serve, swaggerUI.setup(swaggerJson));
 
-
-app.use(errorHandler);
+app.use(globalErrorHandler);
 app.use(notFoundHandler)
 
 

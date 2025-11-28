@@ -13,9 +13,7 @@
         /* Completeness */
      "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true   ,  
-    "baseUrl": ".",
-        // "types": ["reflect-metadata"],
-
+    // "baseUrl": ".", /*Adjust relative path*/
 
     // new vars
     "strictPropertyInitialization": false,
@@ -27,11 +25,15 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "rootDir": ".",
-    "typeRoots": ["./node_modules/@types"]
+    "types": ["jest", "node"], // Include "node" if you're also using Node.js types
+
+    "typeRoots": [ "./env.d.ts","./node_modules/@types", "../node_modules/@types", "../../node_modules/@types","src/**/*.ts"]                                /* Specify multiple folders that act like './node_modules/@types'. */
 
   },
-    "include": [
-    "./src/**/*.ts", "server.d.ts" ],
+  "include": [
+    "./**/*.ts", "./*.ts", "./**/**.*.ts","./**/**.*.ts"
+, "jest.config.ts","src/**/*.ts", "src/@types/**/*.d.ts", "tests/**/*"  ],
   "exclude": ["./node_modules/*","node_modules"],
 }
+
 

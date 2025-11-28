@@ -1,4 +1,14 @@
-export type IUser =  {
+import mongoose from "mongoose";
+
+/**
+ * Represents a user object with database timestamps and ID.
+ */
+export interface UserReadResponse {
+  /**
+   * The unique identifier of the user (e.g., MongoDB ObjectId).
+   * @example "60b8f4d5f8a3c3001f3e9a0e"
+   */
+  _id: mongoose.Types.ObjectId;
   /**
    * The user's name.
    * @example "John Doe"
@@ -30,14 +40,3 @@ export type IUser =  {
    */
   updatedAt: Date;
 }
-
-/**
- * Represents a user create body object
- */
-export interface UserCreationBody extends Pick<IUser, "email" | "name" | "age">{}
-
-/**
- * Represents a user update body object
- */
-export interface UserUpdateBody extends Partial<Pick<IUser, "email" | "name" | "age">>{}
-

@@ -1,10 +1,8 @@
-import { MongoRepository, Repository } from "typeorm";
-import { User } from "../entities/User.entity";
+
+import mongoose from "mongoose";
 
 export interface IUserRepository  {
     findByName(name: string): Promise<any>;
     findByEmail(email: string): Promise<any>;
-
-
-
+    findById(id: mongoose.Types.ObjectId): Promise<any>;
 }

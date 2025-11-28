@@ -11,9 +11,6 @@ import { buildProviderModule } from "inversify-binding-decorators";
 import { DataSource } from 'typeorm';
 import  { TYPES } from "../types/binding.types"
 import { DatabaseProvider } from "../services/database.service";
-import { interfaces } from 'inversify-express-utils';
-
-
 
 const iocContainer = new Container();
 
@@ -42,28 +39,4 @@ iocContainer.bind<IUserRepository>(TYPES.IUserRepository).toDynamicValue(
 }
 
 export { iocContainer };
-
-
-/**
- import { Container } from "inversify";
-import { DatabaseProvider } from "./services/database.service";
-import { UserService } from "./services/user.service";
-import { UserController } from "./controllers/user.controller";
-import { DataSource } from "typeorm";
-
-const container = new Container();
-
-container.bind<DatabaseProvider>(DatabaseProvider).to(DatabaseProvider).inSingletonScope();
-container.bind<DataSource>(DataSource).toConstantValue(container.get(DatabaseProvider).getDataSource()); // Bind DataSource instance
-container.bind<UserService>(UserService).to(UserService);
-// Bind controllers if using inversify-binding-controllers
-// e.g., container.bind<UserController>(UserController).to(UserController); 
-
-export { container };
-
- */
-// 5. Export the container as "iocContainer" (required by tsoa)
-
-
-
 

@@ -1,5 +1,4 @@
-import express, { Application, Request } from 'express';
-import cors, { CorsOptions } from 'cors';
+import { CorsOptions } from 'cors';
 
 
 // Add a list of allowed origins (e.g., your frontend application's URL)

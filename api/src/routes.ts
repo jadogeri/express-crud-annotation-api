@@ -23,14 +23,42 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "Pick_IUser.email-or-name_": {
+    "mongoose.Types.ObjectId": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"email":{"dataType":"string","required":true},"name":{"dataType":"string","required":true}},"validators":{}},
+        "type": {"dataType":"string","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "UserCreationResponse": {
+        "dataType": "refObject",
+        "properties": {
+            "_id": {"ref":"mongoose.Types.ObjectId","required":true},
+            "name": {"dataType":"string","required":true},
+            "email": {"dataType":"string","required":true,"validators":{"pattern":{"errorMsg":"please provide correct email","value":"^(.+)@(.+)$"}}},
+            "age": {"dataType":"integer","required":true,"validators":{"isInt":{"errorMsg":"we would kindly ask you to provide a number here"},"minimum":{"errorMsg":"minimum age is 0","value":0}}},
+            "createdAt": {"dataType":"datetime","required":true},
+            "updatedAt": {"dataType":"datetime","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "UserCreationBody": {
-        "dataType": "refAlias",
-        "type": {"ref":"Pick_IUser.email-or-name_","validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "email": {"dataType":"string","required":true,"validators":{"pattern":{"errorMsg":"please provide correct email","value":"^(.+)@(.+)$"}}},
+            "name": {"dataType":"string","required":true},
+            "age": {"dataType":"integer","required":true,"validators":{"isInt":{"errorMsg":"we would kindly ask you to provide a number here"},"minimum":{"errorMsg":"minimum age is 0","value":0}}},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "UserUpdateBody": {
+        "dataType": "refObject",
+        "properties": {
+            "email": {"dataType":"string","validators":{"pattern":{"errorMsg":"please provide correct email","value":"^(.+)@(.+)$"}}},
+            "name": {"dataType":"string"},
+            "age": {"dataType":"integer","validators":{"isInt":{"errorMsg":"we would kindly ask you to provide a number here"},"minimum":{"errorMsg":"minimum age is 0","value":0}}},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };
@@ -78,7 +106,7 @@ export function RegisterRoutes(app: Router) {
                 response,
                 next,
                 validatedArgs,
-                successStatus: undefined,
+                successStatus: 201,
               });
             } catch (err) {
                 return next(err);
@@ -147,7 +175,7 @@ export function RegisterRoutes(app: Router) {
                 response,
                 next,
                 validatedArgs,
-                successStatus: undefined,
+                successStatus: 200,
               });
             } catch (err) {
                 return next(err);
@@ -155,6 +183,8 @@ export function RegisterRoutes(app: Router) {
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         const argsUserController_updateUser: Record<string, TsoaRoute.ParameterSchema> = {
+                userId: {"in":"path","name":"userId","required":true,"dataType":"string"},
+                requestBody: {"in":"body","name":"requestBody","required":true,"ref":"UserUpdateBody"},
         };
         app.put('/users/:userId',
             ...(fetchMiddlewares<RequestHandler>(UserController)),
@@ -189,6 +219,7 @@ export function RegisterRoutes(app: Router) {
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         const argsUserController_deleteUser: Record<string, TsoaRoute.ParameterSchema> = {
+                userId: {"in":"path","name":"userId","required":true,"dataType":"string"},
         };
         app.delete('/users/:userId',
             ...(fetchMiddlewares<RequestHandler>(UserController)),
