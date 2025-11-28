@@ -1,9 +1,10 @@
 import { injectable } from "inversify";
 import { DataSource } from "typeorm";
 import { User } from "../entities/User.entity";
+import { IDatabaseService } from "../interfaces/IDatabaseService.interface";
 
 @injectable()
-export class DatabaseProvider {
+export class DatabaseProvider implements IDatabaseService{
   private dataSource: DataSource;
 
   constructor() {

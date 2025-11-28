@@ -27,7 +27,7 @@
     "rootDir": ".",
     "types": ["jest", "node"], // Include "node" if you're also using Node.js types
 
-    "typeRoots": [ "./env.d.ts","./node_modules/@types", "../node_modules/@types", "../../node_modules/@types","src/**/*.ts"]                                /* Specify multiple folders that act like './node_modules/@types'. */
+    "typeRoots": [ "./env.d.ts","./node_modules/@types", "../node_modules/@types","src/**/*.ts"]                                /* Specify multiple folders that act like './node_modules/@types'. */
 
   },
   "include": [

@@ -11,6 +11,7 @@ import { buildProviderModule } from "inversify-binding-decorators";
 import { DataSource } from 'typeorm';
 import  { TYPES } from "../types/binding.types"
 import { DatabaseProvider } from "../services/database.service";
+import { IDatabaseService } from '../interfaces/IDatabaseService.interface';
 
 const iocContainer = new Container();
 
@@ -22,6 +23,7 @@ export const configureIOC = () => {
 
     iocContainer.bind<UserController>(UserController).toSelf();
 
+    iocContainer.bind<IDatabaseService>(TYPES.IDatabaseService).to(DatabaseProvider).inSingletonScope();
     iocContainer.bind<IUserService>(TYPES.IUserService).to(UserService).inSingletonScope();
    // Bind the interface to the concrete implementation
     iocContainer.bind<DatabaseProvider>(DatabaseProvider).to(DatabaseProvider).inSingletonScope();
