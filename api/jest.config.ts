@@ -12,7 +12,7 @@ export default {
   },
   globalTeardown: '<rootDir>/tests/__configurations__/global-teardown.ts',
   setupFilesAfterEnv: ['<rootDir>/tests/__configurations__/setup.ts'],
-  globalSetup: '<rootDir>/tests/__configurations__/global-teardown.ts',
+  globalSetup: '<rootDir>/tests/__configurations__/global-setup.ts',
   testRunner: "jest-circus/runner",
   workerIdleMemoryLimit: "512MB",
   coveragePathIgnorePatterns: [

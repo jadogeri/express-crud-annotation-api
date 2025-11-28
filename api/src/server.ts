@@ -5,13 +5,14 @@ import { iocContainer } from "./configs/ioc.config";
 
 async function bootstrap() {
   await iocContainer.get(MongoDBService).connect();
+  if (process.env.NODE_ENV !== 'test') {
     app.listen(port , () => {
       console.log(`🚀 Server is running on: http://localhost:${port}`);
       console.log(`📚 API Documentation: http://localhost:${port}/docs`);
-  });
+    });
+  }
 }
 
 bootstrap().catch(console.error);
-
 
 

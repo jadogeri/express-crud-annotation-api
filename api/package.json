@@ -26,7 +26,7 @@
     "build": "tsoa spec-and-routes && tsc",
     "start": "node ./build/src/server.js",
     "dev": "ts-node-dev ./src/server.ts",
-    "test": "cross-env jest --config=jest.config.ts --coverage  --testPathPatterns=tests/ --runInBand --colors --verbose --detectOpenHandles"
+    "test": "cross-env NODE_ENV=test DOTENV_CONFIG_PATH=.test.env jest --setupFiles dotenv/config && jest --config=jest.config.ts --coverage  --testPathPatterns=tests/ --runInBand --colors --verbose --detectOpenHandles"
   },
   "dependencies": {
     "@babel/cli": "^7.28.3",

@@ -38,7 +38,7 @@ describe('MongoDBService.getDataSource() getDataSource method', () => {
       expect(dataSource).toBeDefined();
       expect(dataSource.options).toBeDefined();
       expect(dataSource.options.type).toBe('mongodb');
-      expect(dataSource.options.database).toBe('testdb');
+      expect(dataSource.options.database).toBe('testDB');
       expect(dataSource.options.entities).toContain(User);
       expect(dataSource.options.synchronize).toBe(true);
       expect(dataSource.options.logging).toBe(true);
