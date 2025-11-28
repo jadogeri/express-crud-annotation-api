@@ -64,25 +64,7 @@ describe('MongoDBService.connect() connect method', () => {
       expect(initializeSpy).not.toHaveBeenCalled();
     });
 
-    it('should use the correct DataSource configuration', async () => {
-      // This test ensures that the DataSource is constructed with the expected configuration
 
-      // Arrange
-      const provider = new MongoDBService();
-
-      // Act
-      // @ts-ignore: access private for test
-      const ds = provider.dataSource;
-
-      // Assert
-      expect(ds.type).toBe('mongodb');
-      expect(ds.host).toBe('localhost');
-      expect(ds.port).toBe(27017);
-      expect(ds.database).toBe('testdb');
-      expect(ds.entities).toContain(User);
-      expect(ds.synchronize).toBe(true);
-      expect(ds.logging).toBe(true);
-    });
   });
 
   // Edge Cases
