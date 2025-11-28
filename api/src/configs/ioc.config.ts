@@ -27,7 +27,7 @@ export const configureIOC = () => {
     iocContainer.bind<DatabaseProvider>(DatabaseProvider).to(DatabaseProvider).inSingletonScope();
     iocContainer.bind<DataSource>(DataSource).toConstantValue(iocContainer.get(DatabaseProvider).getDataSource()); // Bind DataSource instance
 
-iocContainer.bind<IUserRepository>(TYPES.IUserRepository).toDynamicValue(
+    iocContainer.bind<IUserRepository>(TYPES.IUserRepository).toDynamicValue(
     () => {
         const dataSource = iocContainer.get(DatabaseProvider).getDataSource()
         return new UserRepository(dataSource);

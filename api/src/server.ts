@@ -1,5 +1,5 @@
 import { app } from "./app";
-const port =  3000;
+const port =  process.env.EXPRESS_APP_PORT || 3000;
 import { DatabaseProvider } from "./services/database.service";
 import { iocContainer } from "./configs/ioc.config";
 

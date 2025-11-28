@@ -1,4 +1,4 @@
-## **Express DI API**
+## **Express CRUD Annotation API**
 
 **Version:** 1.10.0
 **Date:** November 27, 2025
@@ -47,7 +47,8 @@ Note: use file .env.sample as template (or rename to .env) for global variables.
       </ul>
     </li>
     <li><a href="#4-api-documentation">4. API Documentation</a> </li>
-    <li><a href="#5-references">5. References</a> </li>
+    <li><a href="#5-tests">5. Tests</a> </li>
+    <li><a href="#6-references">6. References</a> </li>
 </ul>
 
 ## **1. Introduction**
@@ -99,18 +100,11 @@ This document outlines the components, and design considerations for functionali
 
 #### 4 API Documentation ####
 
-Note: Assuming port is `4000`
 
-| Method        | Description    | Endpoint                                        | Body      | Param       |
-| ----------- | ------ | -------------------------------------------------- | ------------------------ |------------------------ |
-| `GET`       | Returns all users | `http:localhost:4000/users/` | none       |   none          |             
-| `GET` | Return single user | `http:localhost:4000/users/:id` | none  |  id e.g `69228e6b8f9f98a7327b2d7a` |   
-| `POST`   | Creates a user | `http:localhost:4000/users/` | e.g `{"username": "john doe", "email":"johndoe@gmail.com"}`    | none |                      
-| `PUT`| Updates a user | `http:localhost:4000/users/:id` | e.g `{"username": "john doe", "email":"johndoe@gmail.com"}` |  id e.g `69228e6b8f9f98a7327b2d7c`    |  
-| `DELETE`| Removes a user |`http:localhost:4000/users/:id`  | none  | id e.g `69228e6b8f9f98a7327b2d7b`    |     
+#### 5 Tests ####
 
 
-## **5. References**
+## **6. References**
 * npm : [IoC Container for Typescript - 3.X)](https://www.npmjs.com/package/typescript-ioc).
 * FreeCodeCamp : [Frontend Web Development: (HTML, CSS, JavaScript, TypeScript, React)](https://www.youtube.com/watch?v=MsnQ5uepIa).
 * AweSome Open Source : [Awesome Readme Templates](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
