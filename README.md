@@ -20,6 +20,7 @@ This is a backend Application temnplate implemting tsoa, typeorm, inversion of c
 ## Environment Variables 
 
 Note: use file .env.sample as template (or rename to .env) for global variables.
+Note: make sure port used is same in tsoa.json.
 
 ## Screenshots
 
@@ -71,16 +72,16 @@ This document outlines the components, and design considerations for functionali
 
 1 Open command prompt or terminal.
 
-2 Type command git clone https://github.com/jadogeri/express-di-api.git then press enter.
+2 Type command git clone https://github.com/jadogeri/express-crud-annotation-api.git then press enter.
 
 ```bash
-  git clone https://github.com/jadogeri/express-di-api.git
+  git clone https://github.com/jadogeri/express-crud-annotation-api.git
 ```
 
-3 Enter command cd express-di-api/app then press enter.
+3 Enter command cd express-crud-annotation-api/api then press enter.
 
 ```bash
-  cd express-di-api/app
+  cd express-crud-annotation-api/api
 ```
 
 #### **3.1.1 Run Locally**
@@ -91,15 +92,20 @@ This document outlines the components, and design considerations for functionali
   npm install --force
 ```
 
-2 Type npm start to run application
+2 Type npm run dev to run application
 
 ```bash
-  npm start
+  npm run dev
 ```
 ---
 
 #### 4 API Documentation ####
 
+OpenAI swagger documentation is available on http://localhost:{{port}}/docs.
+
+Default url is http://localhost:3000/docs while app is running .
+
+![API DOCS](assets/images/swagger.png)
 
 #### 5 Tests ####
 

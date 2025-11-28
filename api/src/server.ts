@@ -1,10 +1,10 @@
 import { app } from "./app";
 const port =  process.env.EXPRESS_APP_PORT || 3000;
-import { DatabaseProvider } from "./services/database.service";
+import { MongoDBService } from "./services/MongoDBService.service";
 import { iocContainer } from "./configs/ioc.config";
 
 async function bootstrap() {
-  await iocContainer.get(DatabaseProvider).connect();
+  await iocContainer.get(MongoDBService).connect();
     app.listen(port , () => {
       console.log(`🚀 Server is running on: http://localhost:${port}`);
       console.log(`📚 API Documentation: http://localhost:${port}/docs`);

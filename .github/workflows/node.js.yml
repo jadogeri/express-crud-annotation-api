@@ -12,8 +12,8 @@ on:
   pull_request:
     branches: [ "main" ]
     paths:
-      - 'app/v2/src/**'
-      - 'app/v2/tests/**'
+      - 'api/src/**'
+      - 'api/tests/**'
 
 jobs:
   build:
@@ -36,7 +36,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         cache-dependency-path: './api/package-lock.json' # Adjust path as needed
-    - run: npm ci
+    - run: npm ci --force
     - run: npm run build --if-present
     - run: npm test
 

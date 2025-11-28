@@ -28,7 +28,6 @@ beforeAll(async () => {
   });
 
   const d = await dataSource.initialize();
-  console.log("datas...............................................", dataSource)
   userRepository = new UserRepository(d);
 });
 
