@@ -1,4 +1,5 @@
 
+import { DataSource } from "typeorm";
 import { User } from "../../src/entities/User.entity";
 import { MongoDBService } from '../../src/services/MongoDBService.service';
 
@@ -70,11 +71,11 @@ describe('MongoDBService.getDataSource() getDataSource method', () => {
     it('should return a DataSource with entities array containing only User', () => {
       // This test ensures the entities array is as expected
       const provider = new MongoDBService();
-      const dataSource = provider.getDataSource();
+      const dataSource : DataSource = provider.getDataSource();
 
       expect(Array.isArray(dataSource.options.entities)).toBe(true);
-      expect(dataSource.options.entities.length).toBe(1);
-      expect(dataSource.options.entities[0]).toBe(User);
+      expect(dataSource?.options.entities.length).toBe(1);
+      expect(dataSource?.options.entities[0]).toBe(User);
     });
 
     it('should not throw when getDataSource is called before DataSource is initialized', () => {
