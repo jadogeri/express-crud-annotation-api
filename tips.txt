@@ -1,4 +1,0 @@
-//tsoa.json - file generated
-
-routesDir - routes.ts
-outputDirectory - swagger.json

@@ -6,17 +6,26 @@ name: Node.js CI
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - 'api/src/**'
+      - 'api/tests/**'
   pull_request:
     branches: [ "main" ]
+    paths:
+      - 'app/v2/src/**'
+      - 'app/v2/tests/**'
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./api
 
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 22.x]
+        node-version: [ 20.x, 22.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -26,6 +35,16 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+        cache-dependency-path: './api/package-lock.json' # Adjust path as needed
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
+
+
+
+
+
+
+
+
+
