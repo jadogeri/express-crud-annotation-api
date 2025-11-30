@@ -1,7 +1,7 @@
 
 import { DataSource, EntityMetadata, EntitySchema } from "typeorm";
-import { User } from "../../src/entities/User.entity";
-import { MongoDBService } from '../../src/services/MongoDBService.service';
+import { User } from "../../../src/entities/User.entity";
+import { MongoDBService } from '../../../src/services/MongoDBService.service';
 
 
 // api/src/services/database.service.getDataSource.spec.ts
@@ -9,7 +9,7 @@ import { MongoDBService } from '../../src/services/MongoDBService.service';
 
 // api/src/services/database.service.getDataSource.spec.ts
 // Mock the User entity to avoid DB dependencies
-jest.mock("../../src/entities/User.entity", () => ({
+jest.mock("../../../src/entities/User.entity", () => ({
   User: jest.fn().mockImplementation(() => ({})),
 }));
 

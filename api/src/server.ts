@@ -1,8 +1,10 @@
-import { app } from "./app";
+import { buildApp } from "./app";
 const port =  process.env.EXPRESS_APP_PORT || 3000;
 import { MongoDBService } from "./services/MongoDBService.service";
 import { iocContainer } from "./configs/ioc.config";
+import { Application } from "express";
 
+const app : Application = buildApp();
 async function bootstrap() {
   await iocContainer.get(MongoDBService).connect();
   if (process.env.NODE_ENV !== 'test') {

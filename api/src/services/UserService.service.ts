@@ -40,10 +40,12 @@ export class UserService implements IUserService{
 }
 
 /**
-     * Retrieves a user by their MongoDB ObjectId.
-     * @param mongoId - The ObjectId of the user to retrieve.
+     * Retrieves a user by their MongoDB ObjectId. 
+     * Throws a CustomError if no user is found with the provided id.
+     * 
+     * @param mongoId - The MongoDB ObjectId of the user to retrieve.
      * @returns A promise that resolves to the found user object.
-     * @throws CustomError - Throws a 404 error if no user is found with the given id.
+     * @throws CustomError - If no user is found with the specified id.
      */
     async getOne(mongoId: mongoose.Types.ObjectId): Promise<any> {
 

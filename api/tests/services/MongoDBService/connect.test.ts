@@ -1,6 +1,5 @@
 
-import { User } from "../../src/entities/User.entity";
-import { MongoDBService } from '../../src/services/MongoDBService.service';
+import { MongoDBService } from '../../../src/services/MongoDBService.service';
 
 
 // database.service.connect.spec.ts
@@ -23,7 +22,7 @@ jest.mock("typeorm", () => {
 });
 
 // Mock User entity (no methods to mock, just a placeholder)
-jest.mock("../../src/entities/User.entity", () => ({
+jest.mock("../../../src/entities/User.entity", () => ({
   User: jest.fn(),
 }));
 

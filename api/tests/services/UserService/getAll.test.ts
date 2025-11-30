@@ -3,8 +3,8 @@
 
 // UserService.service.getAll.spec.ts
 
-import { UserRepository } from "../../src/repositories/UserRepository.repository";
-import { UserService } from "../../src/services/UserService.service";
+import { UserRepository } from "../../../src/repositories/UserRepository.repository";
+import { UserService } from "../../../src/services/UserService.service";
 
 // Mock for mongoose (as per instruction)
 class Mockmongoose {

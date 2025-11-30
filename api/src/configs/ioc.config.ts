@@ -12,6 +12,7 @@ import { DataSource } from 'typeorm';
 import  { TYPES } from "../types/binding.types"
 import { MongoDBService } from "../services/MongoDBService.service";
 import { IDatabaseService } from '../interfaces/IDatabaseService.interface';
+import { IUserController } from '../interfaces/IUserController.interface';
 
 const iocContainer = new Container();
 
@@ -22,6 +23,9 @@ iocContainer.load(buildProviderModule());
 export const configureIOC = () => {
 
     iocContainer.bind<UserController>(UserController).toSelf();
+
+    //iocContainer.bind<UserController>(TYPES.IUserController).to(UserController).inSingletonScope();
+
 
     iocContainer.bind<IDatabaseService>(TYPES.IDatabaseService).to(MongoDBService).inSingletonScope();
     iocContainer.bind<IUserService>(TYPES.IUserService).to(UserService).inSingletonScope();
@@ -36,7 +40,7 @@ export const configureIOC = () => {
     }
 ).inSingletonScope();
 
-
+return iocContainer
 
 }
 

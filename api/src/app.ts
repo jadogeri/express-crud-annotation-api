@@ -13,13 +13,13 @@ import cors from 'cors';
 import { notFoundHandler } from './middlewares/noRouteHandler.middleware';
 import { globalErrorHandler } from './middlewares/globalErrorHandler.middleware';
 
+
 dotenv.config();
 
+export const buildApp  = () : Application =>{
 configureIOC();
 
-export const app: Application = express();
-
-
+const app: Application = express();
 
 //middlewares
 app.use(express.json())
@@ -39,9 +39,12 @@ app.use(
 app.use(json());
 
 RegisterRoutes(app);
+
 app.use(["/openapi", "/docs", "/swagger"], swaggerUI.serve, swaggerUI.setup(swaggerJson));
 
 app.use(globalErrorHandler);
 app.use(notFoundHandler)
 
+return app;
 
+}

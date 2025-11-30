@@ -1,7 +1,7 @@
 
-import { CustomError } from "../../src/exceptions/CustomError.exception";
-import { UserRepository } from "../../src/repositories/UserRepository.repository";
-import { UserService } from '../../src/services/UserService.service';
+import { CustomError } from "../../../src/exceptions/CustomError.exception";
+import { UserRepository } from "../../../src/repositories/UserRepository.repository";
+import { UserService } from '../../../src/services/UserService.service';
 
 
 // api/src/services/UserService.service.update.spec.ts

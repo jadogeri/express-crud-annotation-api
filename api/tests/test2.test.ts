@@ -1,39 +1,23 @@
-import { DataSource } from "typeorm";
-import { createMongoContainer } from "./createMongoContainer";
+
 import { UserCreationBody } from "../src/types/UserType.type";
 import { UserRepository } from "../src/repositories/UserRepository.repository";
-import { User } from "../src/entities/User.entity";
-
-let dataSource: DataSource;
-let mongoContainer: any; // Type according to your container object
-
+import { MongoTestContainer } from "./MongoTestContainer";
 
 describe('UserService Integration Test with Testcontainers', () => {
-            jest.setTimeout(60000);
-            let userRepository: UserRepository;
-
+  jest.setTimeout(10000);
+  let userRepository: UserRepository;
+  const mongoTestContainer: MongoTestContainer = new MongoTestContainer();
 
 beforeAll(async () => {
-  const details = await createMongoContainer();
-  mongoContainer = details.container;
-
-  // Use the dynamic host and port instead of 'localhost:27017'
-  dataSource = new DataSource({
-    type: "mongodb",
-    host: details.host,
-    port: details.port,
-    database: "testdb",
-    entities:[User]
-    // ... other TypeORM configurations (entities, logging, etc.)
-  });
-
-  const d = await dataSource.initialize();
-  userRepository = new UserRepository(d);
+  await mongoTestContainer.startTestConatiner();
+  const dataSource = mongoTestContainer.getDataSource();
+  userRepository = new UserRepository(dataSource);
 });
 
 afterAll(async () => {
-  if (dataSource) await dataSource.destroy();
-  if (mongoContainer) await mongoContainer.stop();
+
+  await mongoTestContainer.stopTestConatiner();
+
 });
 
 
@@ -54,5 +38,5 @@ afterAll(async () => {
 
         // const foundUser = await userService.findByEmail(email);
         // expect(foundUser).toEqual(newUser);
-    });
+    },5000);
 });
