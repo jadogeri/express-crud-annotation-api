@@ -49,18 +49,18 @@ describe('UserService.delete() delete method', () => {
 
   // --- Happy Paths ---
 
-  it('should delete a user successfully when user exists and delete is successful (affected === 0)', async () => {
+  it('should delete a user successfully when user exists and delete is successful (affected === 1)', async () => {
     // This test ensures that when a user is found and delete returns affected === 0, the correct success message is returned.
     const foundUser = { _id: mockObjectId, name: 'John Doe', email: 'john@example.com', age: 30 };
     jest.mocked(mockUserRepository.findById).mockResolvedValue(foundUser as any as never);
-    jest.mocked(mockUserRepository.delete).mockResolvedValue({ affected: 0 } as any as never);
+    jest.mocked(mockUserRepository.delete).mockResolvedValue({ affected: 1 } as any as never);
 
     const result = await userService.delete(mockObjectId as any);
 
     expect(mockUserRepository.findById).toHaveBeenCalledWith(mockObjectId as any);
     expect(mockUserRepository.delete).toHaveBeenCalledWith(mockObjectId as any);
     expect(result).toEqual({
-      message: `successfully deleted user with with id '${mockObjectId.toString()}'`,
+      message: `successfully deleted user with id '${mockObjectId.toString()}'`,
     });
   });
 
@@ -77,16 +77,31 @@ describe('UserService.delete() delete method', () => {
     expect(mockUserRepository.delete).not.toHaveBeenCalled();
   });
 
-  it('should return success message even if delete.affected is 0 (edge: user existed but nothing deleted)', async () => {
-    // This test ensures that if delete.affected is 0, the method still returns a success message.
+  it('should return success message even if delete.affected is 1 (edge: user existed but deleted)', async () => {
+    // This test ensures that if delete.affected is 1, the method still returns a success message.
     const foundUser = { _id: mockObjectId, name: 'Jane Doe', email: 'jane@example.com', age: 25 };
+    jest.mocked(mockUserRepository.findById).mockResolvedValue(foundUser as any as never);
+    jest.mocked(mockUserRepository.delete).mockResolvedValue({ affected: 1 } as any as never);
+
+    const result = await userService.delete(mockObjectId as any);
+
+    expect(result).toEqual({
+      message: `successfully deleted user with id '${mockObjectId.toString()}'`,
+    });
+    expect(mockUserRepository.findById).toHaveBeenCalledWith(mockObjectId as any);
+    expect(mockUserRepository.delete).toHaveBeenCalledWith(mockObjectId as any);
+  });
+
+    it('should return failure message even if delete.affected is not 0 (edge: user existed but nothing deleted)', async () => {
+    // This test ensures that if delete.affected is 0, the method still returns a success message.
+    const foundUser = { _id: mockObjectId, name: 'Jane Doe', email: 'jane@example.com', age: 25, text: 1 };
     jest.mocked(mockUserRepository.findById).mockResolvedValue(foundUser as any as never);
     jest.mocked(mockUserRepository.delete).mockResolvedValue({ affected: 0 } as any as never);
 
     const result = await userService.delete(mockObjectId as any);
 
     expect(result).toEqual({
-      message: `successfully deleted user with with id '${mockObjectId.toString()}'`,
+      message: `failed to delete user with id '${mockObjectId.toString()}'`,
     });
     expect(mockUserRepository.findById).toHaveBeenCalledWith(mockObjectId as any);
     expect(mockUserRepository.delete).toHaveBeenCalledWith(mockObjectId as any);
@@ -130,7 +145,7 @@ describe('UserService.delete() delete method', () => {
     const result = await userService.delete(customObjectId as any);
 
     expect(result).toEqual({
-      message: `successfully deleted user with with id 'custom-object-id'`,
+      message: `failed to delete user with id 'custom-object-id'`,
     });
     expect(mockUserRepository.findById).toHaveBeenCalledWith(customObjectId as any);
     expect(mockUserRepository.delete).toHaveBeenCalledWith(customObjectId as any);

@@ -117,10 +117,15 @@ export class UserService implements IUserService{
         }
 
         const response: DeleteResult = await this.userRepository.delete(mongoId)
-        if(response.affected === 0){
+        if(response?.affected == 1){
             return {
-                message : `successfully deleted user with with id '${mongoId.toString()}'`
+                message : `successfully deleted user with id '${mongoId.toString()}'`
             }
+        }else{
+            return {
+                message : `failed to delete user with id '${mongoId.toString()}'`
+            }
+
         }
     }
 
