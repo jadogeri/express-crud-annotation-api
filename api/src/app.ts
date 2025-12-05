@@ -10,8 +10,8 @@ import * as swaggerUI from "swagger-ui-express";
 import { configureIOC } from './configs/ioc.config';
 import { corsOptions } from './configs/cors.config';
 import cors from 'cors';
+import { globalErrorHandler } from './middlewares/globalErrorHandler.mtddleware';
 import { notFoundHandler } from './middlewares/noRouteHandler.middleware';
-import { globalErrorHandler } from './middlewares/globalErrorHandler.middleware';
 
 
 dotenv.config();
