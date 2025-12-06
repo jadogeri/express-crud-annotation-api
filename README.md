@@ -109,6 +109,14 @@ Default url is http://localhost:3000/docs while app is running .
 
 #### 5 Tests ####
 
+2 Type npm run test to run tests
+
+```bash
+  npm run test
+```
+
+![TESTS](assets/images/tests.png)
+
 
 ## **6. References**
 * npm : [IoC Container for Typescript - 3.X)](https://www.npmjs.com/package/typescript-ioc).
