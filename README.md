@@ -7,7 +7,7 @@
 
 ## Description
 
-This is a backend Application temnplate implemting tsoa, typeorm, inversion of control, dependency injection and inversify.
+This is a backend Application template implementing tsoa, typeorm, inversion of control, dependency injection and inversify.
 
 ## Authors
 
